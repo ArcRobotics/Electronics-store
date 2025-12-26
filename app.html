@@ -70,7 +70,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #f97316; }
 
         .preview-container {
-            height: 500px;
+            height: 600px;
             background: white;
             border-top: 2px solid #f97316;
             animation: slideDown 0.4s ease-out;
@@ -110,14 +110,14 @@
             { id: '15', name: 'DIY Electronics', urlPattern: 'https://diyelectronicsegypt.com/?s=', color: 'bg-orange-800' },
             { id: '16', name: 'UGE One', urlPattern: 'https://uge-one.com/?category_product=&s=', suffix: '&search_posttype=product', color: 'bg-orange-600' },
             { id: '17', name: 'Ampere Electronics', urlPattern: 'https://www.ampere-electronics.com/?s=', color: 'bg-orange-500' },
-            { id: '18', name: 'Op-Tronic', urlPattern: 'https://www.op-tronic.com/search?q=', color: 'bg-orange-700' },
+            { id: '18', name: 'Op-Tronic', urlPattern: 'https://www.op-tronic.com/website/search?search=', suffix: '&order=name+asc', color: 'bg-orange-700' },
             { id: '19', name: 'Ram E-Shop', urlPattern: 'https://www.ram-e-shop.com/website/search?search=', color: 'bg-orange-800' }
         ];
 
         function App() {
             const [query, setQuery] = useState('');
             const [sites, setSites] = useState(() => {
-                const saved = localStorage.getItem('multiSearchSites_v12');
+                const saved = localStorage.getItem('multiSearchSites_v13');
                 return saved ? JSON.parse(saved) : DEFAULT_SITES;
             });
 
@@ -126,14 +126,23 @@
             const [activeSiteId, setActiveSiteId] = useState(null);
 
             useEffect(() => {
-                localStorage.setItem('multiSearchSites_v12', JSON.stringify(sites));
+                localStorage.setItem('multiSearchSites_v13', JSON.stringify(sites));
             }, [sites]);
+
+            // ESC key to close preview
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'Escape') setActiveSiteId(null);
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, []);
 
             const handleSearch = (e) => {
                 if (e.key === 'Enter' && query) {
                     setIsScanning(true);
                     setActiveSiteId(null);
-                    setTimeout(() => setIsScanning(false), 1000);
+                    setTimeout(() => setIsScanning(false), 800);
                 }
             };
 
@@ -220,26 +229,37 @@
                                             <div className="flex items-center justify-between text-[10px] mono border-t border-zinc-800 pt-3">
                                                 <span className={`${activeSiteId === site.id ? 'text-orange-500' : 'text-zinc-500'} uppercase flex items-center gap-1`}>
                                                     <Icon name={activeSiteId === site.id ? "chevron-up" : "chevron-down"} size={10} />
-                                                    {activeSiteId === site.id ? 'Close Results' : 'Show Results'}
+                                                    {activeSiteId === site.id ? 'Close Preview' : 'Expand Results'}
                                                 </span>
-                                                <a
-                                                    href={getFullUrl(site, query)}
-                                                    target="_blank"
-                                                    className="text-zinc-600 hover:text-orange-500"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    <Icon name="external-link" size={10} />
-                                                </a>
+                                                <div className="flex gap-2">
+                                                    <Icon name="external-link" size={10} className="text-zinc-600" />
+                                                </div>
                                             </div>
                                         </div>
 
                                         {activeSiteId === site.id && (
                                             <div className="col-span-full preview-container rounded-sm overflow-hidden mb-6">
-                                                <div className="bg-zinc-900 px-4 py-2 border-b border-zinc-800 flex justify-between items-center">
-                                                    <span className="text-[10px] mono text-orange-500">LIVE_VIEW: {site.name}</span>
-                                                    <button onClick={() => setActiveSiteId(null)} className="text-zinc-500 hover:text-white">
-                                                        <Icon name="x" size={14} />
-                                                    </button>
+                                                <div className="bg-zinc-900 px-4 py-2 border-b border-orange-500/30 flex justify-between items-center">
+                                                    <div className="flex items-center gap-4">
+                                                        <span className="text-[10px] mono text-orange-500 uppercase tracking-widest">LIVE_SURFACE_SCAN: {site.name}</span>
+                                                        <span className="text-[9px] text-zinc-600 mono">Press ESC to exit</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-3">
+                                                        <a
+                                                            href={getFullUrl(site, query)}
+                                                            target="_blank"
+                                                            className="flex items-center gap-2 bg-orange-600 text-white px-3 py-1 rounded-sm text-[10px] mono font-bold hover:bg-orange-500 transition-colors"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        >
+                                                            <Icon name="arrow-up-right" size={12} /> VISIT WEBSITE
+                                                        </a>
+                                                        <button
+                                                            onClick={() => setActiveSiteId(null)}
+                                                            className="text-zinc-500 hover:text-white p-1"
+                                                        >
+                                                            <Icon name="x" size={16} />
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <iframe
                                                     src={getFullUrl(site, query)}
@@ -262,7 +282,7 @@
 
                     <footer className="mt-auto py-6 border-t border-zinc-900 bg-black/50 px-4">
                         <div className="max-w-7xl mx-auto flex justify-between items-center mono text-[10px] text-zinc-700">
-                            <span>ELECTRONICS_SHOPPER_CORE_V12</span>
+                            <span>ELECTRONICS_SHOPPER_V13</span>
                             <span className="flex items-center gap-2">
                                 <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
                                 GLOBAL_NETWORK_ACTIVE
