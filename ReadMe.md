@@ -23,16 +23,11 @@ The tool is pre-configured to search the following local providers:
 
 ---
 
-## ⚠️ Important: Iframe Connectivity (Refused to Connect)
+## ⚠️ Important: Due to Iframe Connectivity (Refused to Connect)
 
-Because this tool loads external websites into frames for comparison, you may encounter a **"refused to connect"** error on certain sites (notably **Lampatronics** and **Raspberry Pi**).
+### Install this chrome extension
 
-### Why this happens:
-Many Egyptian websites implement a security header called `X-Frame-Options: SAMEORIGIN`. This is a security measure that prevents their site from being "framed" by other domains to protect against clickjacking.
-
-### How to resolve:
-1.  **Visit Directly:** Every card includes a **"Visit"** button. Clicking this will open the search result in a new tab, bypassing the restriction.
-2.  **Browser Extensions:** For power users or personal use, you can install a browser extension like **"Ignore X-Frame-Options"** (available for Chrome and Edge). This will allow the sites to load perfectly within the dashboard's comparison panes.
+![ElectronicsHub](extension.png)
 
 ---
 
