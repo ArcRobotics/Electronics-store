@@ -26,7 +26,7 @@ The tool is pre-configured to search the following local providers:
 ## ⚠️ Important: Due to Iframe Connectivity (Refused to Connect)
 
 ### Install this chrome extension
-
+https://chromewebstore.google.com/detail/gleekbfjekiniecknbkamfmkohkpodhe?utm_source=item-share-cb
 ![ElectronicsHub](extension.png)
 
 ---

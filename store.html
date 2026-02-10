@@ -118,25 +118,26 @@
 			{ id: '5', name: 'UGE One', urlPattern: 'https://uge-one.com/?category_product=&s=', suffix: '&search_posttype=product', color: 'bg-lime-500' },
 			{ id: '6', name: 'MicroOhm', urlPattern: 'https://microohm-eg.com/?s=', suffix: '&post_type=product&type_aws=true', color: 'bg-violet-500' },
 			{ id: '7', name: 'Fut Electronics', urlPattern: 'https://store.fut-electronics.com/search?type=product&q=', color: 'bg-indigo-500' },
-			{ id: '8', name: 'IN3D Shop', urlPattern: 'https://www.in3d-shop.com/search?q=', color: 'bg-pink-500' },
-			{ id: '9', name: '3DSmart Shop', urlPattern: 'https://3dsmart-shop.com/?s=', color: 'bg-orange-600' },
+			{ id: '8', name: 'mecha-tronx', urlPattern: 'https://mecha-tronx.com/?product_cat=&s=', color: 'bg-slate-500' },
+			{ id: '9', name: 'Op-Tronic', urlPattern: 'https://www.op-tronic.com/website/search?search=', suffix: '&order=name+asc', color: 'bg-slate-500' },
 			{ id: '10', name: 'Most Electronic', urlPattern: 'https://mostelectronic.com/?s=', color: 'bg-sky-500' },
-			{ id: '11', name: 'Circuits Elec', urlPattern: 'https://circuits-elec.com/?s=', color: 'bg-teal-500' },
-			{ id: '12', name: 'Raspberry Pi', urlPattern: 'https://www.raspberrypi.com/search/?q=', color: 'bg-rose-500' },
-			{ id: '13', name: 'DIY Electronics', urlPattern: 'https://diyelectronicsegypt.com/?s=', color: 'bg-amber-500' },
-			{ id: '14', name: 'Ampere Electronics', urlPattern: 'https://www.ampere-electronics.com/?s=', color: 'bg-orange-400' },
-			{ id: '15', name: 'Op-Tronic', urlPattern: 'https://www.op-tronic.com/website/search?search=', suffix: '&order=name+asc', color: 'bg-slate-500' },
-			{ id: '16', name: 'Electra store', urlPattern: 'https://electra.store/?s=', suffix: '&post_type=product&dgwt_wcas=1', color: 'bg-slate-500' },
-			{ id: '17', name: 'Dev Boards', urlPattern: 'https://devboardsmarket.com/search?q=', color: 'bg-slate-500' },
-			{ id: '18', name: 'CNC Egypt', urlPattern: 'https://cncegy.com/?s=', color: 'bg-red-500' }
+			{ id: '11', name: 'IN3D Shop', urlPattern: 'https://www.in3d-shop.com/search?q=', color: 'bg-pink-500' },
+			{ id: '12', name: '3DSmart Shop', urlPattern: 'https://3dsmart-shop.com/?s=', color: 'bg-orange-600' },
+			{ id: '13', name: 'Circuits Elec', urlPattern: 'https://circuits-elec.com/?s=', color: 'bg-teal-500' },
+			{ id: '14', name: 'Raspberry Pi', urlPattern: 'https://www.raspberrypi.com/search/?q=', color: 'bg-rose-500' },
+			{ id: '15', name: 'DIY Electronics', urlPattern: 'https://diyelectronicsegypt.com/?s=', color: 'bg-amber-500' },
+			{ id: '16', name: 'Ampere Electronics', urlPattern: 'https://www.ampere-electronics.com/?s=', color: 'bg-orange-400' },
+			{ id: '17', name: 'Electra store', urlPattern: 'https://electra.store/?s=', suffix: '&post_type=product&dgwt_wcas=1', color: 'bg-slate-500' },
+			{ id: '18', name: 'Dev Boards', urlPattern: 'https://devboardsmarket.com/search?q=', color: 'bg-slate-500' },
+			{ id: '19', name: 'CNC Egypt', urlPattern: 'https://cncegy.com/?s=', color: 'bg-red-500' }
 		];
 
 		function App() {
 			const [query, setQuery] = useState('');
 			const [sites] = useState(DEFAULT_SITES);
-			const [view, setView] = useState('grid');
+			const [view, setView] = useState('compare');
 			const [activeSiteId, setActiveSiteId] = useState(null);
-			const [compareSelection, setCompareSelection] = useState(['1', '2', '3', '4', '5', '6']);
+			const [compareSelection, setCompareSelection] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9']);
 
 			const getFullUrl = (siteId, searchTerm) => {
 				const site = sites.find(s => s.id === siteId);
